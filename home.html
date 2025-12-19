@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Геншин Инсайт</title>
+  <style>
+    :root{
+      --bg-0: rgba(8, 12, 18, 0.72);
+      --bg-1: rgba(10, 16, 24, 0.55);
+      --card: rgba(255, 255, 255, 0.10);
+      --card-2: rgba(255, 255, 255, 0.14);
+      --stroke: rgba(255, 255, 255, 0.18);
+      --text: rgba(255, 255, 255, 0.92);
+      --muted: rgba(255, 255, 255, 0.72);
+      --accent: rgba(120, 200, 255, 0.85);
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --shadow2: 0 10px 24px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+
+    *{ box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Courier New", Courier, monospace;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, var(--bg-0), var(--bg-1)),
+        url('./assets/bg_home.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .wrap{
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 54px 22px 92px;
+      text-align: center;
+    }
+
+    .hero{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10px 0 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(30px, 3.6vw, 52px);
+      letter-spacing: 1px;
+      line-height: 1.05;
+      text-transform: uppercase;
+      text-shadow:
+        0 10px 30px rgba(0,0,0,0.55),
+        0 0 26px rgba(120,200,255,0.18);
+    }
+
+    .hero::after{
+      content: none;
+    }
+
+    header p{
+      margin: 12px auto 0;
+      color: rgba(255,255,255,0.78);
+      max-width: 70ch;
+      font-size: 14px;
+      line-height: 1.6;
+      text-shadow: 0 10px 26px rgba(0,0,0,0.55);
+    }
+
+    main {
+      width: 100%;
+      max-width: 1100px;
+      margin: 110px auto 34px;
+      padding: 0 22px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 720px){
+      main{ grid-template-columns: 1fr; }
+    }
+
+    .element-title{
+      grid-column: 1 / -1;
+      margin: 18px 0 2px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .element-title::before,
+    .element-title::after{
+      content:"";
+      height: 1px;
+      flex: 1 1 auto;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+      opacity: 0.9;
+    }
+
+    .element-title h3{
+      margin: 0;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.18);
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .element-title .hint{
+      margin: 0;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      white-space: nowrap;
+    }
+
+    .element-title[data-el="pyro"] h3{
+      border-color: rgba(255, 120, 80, 0.55);
+      box-shadow: 0 0 0 3px rgba(255, 120, 80, 0.12), 0 0 22px rgba(255, 120, 80, 0.18);
+    }
+    .element-title[data-el="anemo"] h3{
+      border-color: rgba(120, 255, 210, 0.50);
+      box-shadow: 0 0 0 3px rgba(120, 255, 210, 0.10), 0 0 22px rgba(120, 255, 210, 0.16);
+    }
+    .element-title[data-el="cryo"] h3{
+      border-color: rgba(140, 210, 255, 0.55);
+      box-shadow: 0 0 0 3px rgba(140, 210, 255, 0.10), 0 0 22px rgba(140, 210, 255, 0.16);
+    }
+    .element-title[data-el="electro"] h3{
+      border-color: rgba(200, 120, 255, 0.55);
+      box-shadow: 0 0 0 3px rgba(200, 120, 255, 0.10), 0 0 22px rgba(200, 120, 255, 0.16);
+    }
+    .element-title[data-el="dendro"] h3{
+      border-color: rgba(160, 255, 120, 0.50);
+      box-shadow: 0 0 0 3px rgba(160, 255, 120, 0.10), 0 0 22px rgba(160, 255, 120, 0.16);
+    }
+    .element-title[data-el="geo"] h3{
+      border-color: rgba(255, 210, 120, 0.55);
+      box-shadow: 0 0 0 3px rgba(255, 210, 120, 0.10), 0 0 22px rgba(255, 210, 120, 0.16);
+    }
+    .element-title[data-el="hydro"] h3{
+      border-color: rgba(90, 170, 255, 0.60);
+      box-shadow: 0 0 0 3px rgba(90, 170, 255, 0.12), 0 0 22px rgba(90, 170, 255, 0.18);
+    }
+
+    .character-link{
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border-radius: var(--radius);
+      outline: none;
+    }
+
+    .character-card {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--card-2), var(--card));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow2);
+      transform: translateZ(0);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .character-link:focus-visible .character-card{
+      border-color: rgba(120, 200, 255, 0.65);
+      box-shadow: 0 0 0 3px rgba(120, 200, 255, 0.25), var(--shadow2);
+    }
+
+    .character-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(120, 200, 255, 0.35);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.55);
+    }
+
+    .character-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      image-rendering: auto;
+      filter: saturate(1.08) contrast(1.03);
+      transform: scale(1.01);
+      transition: transform 220ms ease;
+    }
+
+    .character-card:hover img{
+      transform: scale(1.04);
+    }
+
+    .character-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(1200px 260px at 50% 0%, rgba(120,200,255,0.18), transparent 55%),
+        linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.55) 100%);
+      pointer-events:none;
+    }
+
+    .character-card h2 {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+      padding: 12px 12px 12px;
+      font-size: 14px;
+      letter-spacing: 0.2px;
+      color: rgba(255,255,255,0.92);
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tag{
+      font-size: 12px;
+      color: rgba(255,255,255,0.78);
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.25);
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+
+    footer{
+      margin-top: auto;
+      padding: 14px 22px 22px;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+      text-align: center;
+    }
+  </style>
+
+  <script>
+    (function () {
+      const KEY = "home.scrollY";
+
+      function restore() {
+        const raw = sessionStorage.getItem(KEY);
+        if (!raw) return;
+
+        const y = Number(raw);
+        if (!Number.isFinite(y)) return;
+
+        requestAnimationFrame(() => {
+          window.scrollTo(0, y);
+        });
+      }
+
+      function save() {
+        sessionStorage.setItem(KEY, String(window.scrollY || 0));
+      }
+
+      window.addEventListener("pageshow", restore);
+      window.addEventListener("beforeunload", save);
+      window.addEventListener("pagehide", save);
+    })();
+  </script>
+
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="hero">
+        <h1>Геншин Инсайт</h1>
+        <p>Выберите персонажа - здесь будут лучшие сборки, артефакты и рекомендации.</p>
+      </div>
+    </header>
+
+    <main aria-label="Список персонажей">
+      <div class="element-title" data-el="pyro">
+        <h3>Пиро</h3>
+      </div>
+
+      <a class="character-link" href="./characters/c1.html" aria-label="Открыть персонажа 1">
+        <div class="character-card">
+          <img src="./assets/c1.jpg" alt="Ху Тао">
+          <h2><span>Ху Тао</span></h2>
+        </div>
+      </a>
+
+      <a class="character-link" href="./characters/c2.html" aria-label="Открыть персонажа 2">
+        <div class="character-card">
+          <img src="./assets/c2.png" alt="Арлекино">
+          <h2><span>Арлекино</span></h2>
+        </div>
+      </a>
+
+      <div class="element-title" data-el="anemo">
+        <h3>Анемо</h3>
+      </div>
+
+      <a class="character-link" href="./characters/c3.html" aria-label="Открыть персонажа 3">
+        <div class="character-card">
+          <img src="./assets/c3.png" alt="Кадзуха">
+          <h2><span>Кадзуха</span></h2>
+        </div>
+      </a>
+
+      <a class="character-link" href="./characters/c4.html" aria-label="Открыть персонажа 4">
+        <div class="character-card">
+          <img src="./assets/c4.jpg" alt="Странник">
+          <h2><span>Странник</span></h2>
+        </div>
+      </a>
+
+      <div class="element-title" data-el="cryo">
+        <h3>Крио</h3>
+      </div>
+
+      <a class="character-link" href="./characters/c5.html" aria-label="Открыть персонажа 5">
+        <div class="character-card">
+          <img src="./assets/c5.jpg" alt="Скирк">
+          <h2><span>Скирк</span></h2>
+        </div>
+      </a>
+
+      <a class="character-link" href="./characters/c6.html" aria-label="Открыть персонажа 6">
+        <div class="character-card">
+          <img src="./assets/c6.jpg" alt="Аяка">
+          <h2><span>Аяка</span></h2>
+        </div>
+      </a>
+
+      <div class="element-title" data-el="electro">
+        <h3>Электро</h3>
+      </div>
+
+      <a class="character-link" href="./characters/c7.html" aria-label="Открыть персонажа 7">
+        <div class="character-card">
+          <img src="./assets/c7.jpg" alt="Райден">
+          <h2><span>Райден</span></h2>
+        </div>
+      </a>
+
+      <a class="character-link" href="./characters/c8.html" aria-label="Открыть персонажа 8">
+        <div class="character-card">
+          <img src="./assets/c8.jpg" alt="Яэ Мико">
+          <h2><span>Яэ Мико</span></h2>
+        </div>
+      </a>
+
+      <div class="element-title" data-el="dendro">
+        <h3>Дендро</h3>
+      </div>
+
+      <a class="character-link" href="./characters/c9.html" aria-label="Открыть персонажа 9">
+        <div class="character-card">
+          <img src="./assets/c9.jpg" alt="Нахида">
+          <h2><span>Нахида</span></h2>
+        </div>
+      </a>
+
+      <a class="character-link" href="./characters/c10.html" aria-label="Открыть персонажа 10">
+        <div class="character-card">
+          <img src="./assets/c10.jpg" alt="Кинич">
+          <h2><span>Кинич</span></h2>
+        </div>
+      </a>
+
+      <div class="element-title" data-el="geo">
+        <h3>Гео</h3>
+      </div>
+
+      <a class="character-link" href="./characters/c11.html" aria-label="Открыть персонажа 11">
+        <div class="character-card">
+          <img src="./assets/c11.jpg" alt="Чжун Ли">
+          <h2><span>Чжун Ли</span></h2>
+        </div>
+      </a>
+
+      <a class="character-link" href="./characters/c12.html" aria-label="Открыть персонажа 12">
+        <div class="character-card">
+          <img src="./assets/c12.jpg" alt="Альбедо">
+          <h2><span>Альбедо</span></h2>
+        </div>
+      </a>
+
+      <div class="element-title" data-el="hydro">
+        <h3>Гидро</h3>
+      </div>
+
+      <a class="character-link" href="./characters/c13.html" aria-label="Открыть персонажа 13">
+        <div class="character-card">
+          <img src="./assets/c13.jpg" alt="Фурина">
+          <h2><span>Фурина</span></h2>
+        </div>
+      </a>
+
+      <a class="character-link" href="./characters/c14.html" aria-label="Открыть персонажа 14">
+        <div class="character-card">
+          <img src="./assets/c14.png" alt="Нёвиллет">
+          <h2><span>Нёвиллет</span></h2>
+        </div>
+      </a>
+    </main>
+
+    <footer>© Геншин Инсайт</footer>
+  </div>
+</body>
+</html>

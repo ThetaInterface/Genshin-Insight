@@ -1,0 +1,15 @@
+{
+  "name": "genshininsight",
+  "version": "1.0.0",
+  "description": "Site where you can observe best sets for genshin charcters.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "Atamanov Alexander",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^39.2.7"
+  }
+}
